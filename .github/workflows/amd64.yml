@@ -1,0 +1,53 @@
+name: amd64_kernel_build
+run-name: amd64 packages
+on: 
+  workflow_dispatch:
+    inputs:
+      kvnum:
+        description: 'Kernel version number'
+        required: true
+        default: '6.1.6'
+        type: 'string'
+
+jobs:
+  amd64_kernel:
+    name: AMD64 Kernel
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/uycyjnzgntrn/rust-linux:1.64.0
+      options: "--platform linux/amd64 --privileged --cap-add SYS_ADMIN --device /dev/fuse"
+      volumes:
+        - ${{ github.workspace }}:/src
+    steps:
+    - name: Build
+      shell: bash
+      run: |
+        APPVERSION=$(grep "^version" app/entrusted_client/Cargo.toml | cut -d'=' -f2 | xargs)
+        echo "entrusted_version=$APPVERSION" >> $GITHUB_ENV
+        
+        olddir=$(pwd)
+
+        mkdir -p /tmp/artifacts
+
+        apt update && apt install -y xz-utils build-essential curl bc kmod cpio flex clang libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd
+        
+        mkdir -p /usr/src/kernel
+        
+        curl -o /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${{ inputs.kvnum }}.tar.xz        
+        tar axf linux-*.tar.xz -C /usr/src/kernel        
+        rm /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz                
+        curl -o /usr/src/kernel/linux-${{ inputs.kvnum }}/.config  https://git.alpinelinux.org/aports/plain/main/linux-lts/virt.x86_64.config
+
+        cd /usr/src/kernel/linux-${{ inputs.kvnum }}
+        
+        ./scripts/config --disable SYSTEM_TRUSTED_KEYS
+        ./scripts/config --disable SYSTEM_REVOCATION_KEYS        
+        ./scripts/config --disable DEBUG_INFO
+        ./scripts/config --enable DEBUG_INFO_NONE 
+        
+        nice make CC="ccache clang" -j`nproc` bindeb-pkg &&  cp ../*.deb /tmp/artifacts/' 
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-image-tinierdeblive-amd64
+        path: /tmp/artifacts        
