@@ -28,14 +28,14 @@ jobs:
 
         apt update && apt install -y xz-utils build-essential curl bc kmod cpio flex clang libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd
         
-        mkdir -p /usr/src/kernel
+        mkdir -p /usr/src/kernel && cd /usr/src/kernel
         
-        curl -o /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${{ inputs.kvnum }}.tar.xz        
-        tar axf linux-*.tar.xz -C /usr/src/kernel        
-        rm /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz                
-        curl -o /usr/src/kernel/linux-${{ inputs.kvnum }}/.config  https://git.alpinelinux.org/aports/plain/main/linux-lts/virt.x86_64.config
-
+        wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${{ inputs.kvnum }}.tar.xz        
+        tar axf linux-*.tar.xz      
+        rm /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz            
+        
         cd /usr/src/kernel/linux-${{ inputs.kvnum }}
+        curl -o /usr/src/kernel/linux-${{ inputs.kvnum }}/.config  https://git.alpinelinux.org/aports/plain/main/linux-lts/virt.x86_64.config        
         
         ./scripts/config --disable SYSTEM_TRUSTED_KEYS
         ./scripts/config --disable SYSTEM_REVOCATION_KEYS        
