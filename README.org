@@ -1,0 +1,35 @@
+#+TITLE: README
+
+* What is this?
+
+** Overview
+
+This repository provides Debian packages for Linux kernel images (=amd64= and =arm64=).
+
+The goal is to produce /very/ minimal kernel images for Live CDs, with a focus on server systems.
+- The target kernel version is the latest stable release from https://kernel.org
+- Audio drivers and such are disregarded
+
+** Main objectives
+
+- The system should be able to successfully boot from =UEFI= or =BIOS= mode on most machines
+- The system should successfully power off without hanging
+- The system should provide modules/features required by container solutions (=podman=, =docker=, etc.)  
+- The system should support =iptables=
+- The system should support popular common file-systems used in Live CDs (=squashfs=, etc.)
+
+** Initial use-case
+
+The first use-case for this repository is supporting the Live CD creation of a document sanitizer tool ([[https://github.com/rimerosolutions/entrusted/][Entrusted]]).
+    
+* What is available?
+
+Please visit the [[https://github.com/yveszoundi/linux-image-tinierdeblive/releases][releases page]] for downloads (64-bit: [[https://en.wikipedia.org/wiki/X86-64][amd64/x86_64]] and [[https://en.wikipedia.org/wiki/AArch64][aarch64/arm64]]).
+
+* Few references
+
+- [[https://kernel.org/][The Linux Kernel Archives]]
+- Building a Debian kernel package
+  - [[https://wiki.debian.org/BuildADebianKernelPackage][Debian wiki page guide]]
+  - [[https://www.dwarmstrong.org/kernel/][Blog post from Daniel Wayne Armstrong]]  
+- [[https://git.alpinelinux.org/aports/tree/main/linux-lts?h=master][Alpine Linux default kernel configuration files]]
