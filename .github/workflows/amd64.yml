@@ -21,10 +21,7 @@ jobs:
     steps:
     - name: Build
       shell: bash
-      run: |
-        APPVERSION=$(grep "^version" app/entrusted_client/Cargo.toml | cut -d'=' -f2 | xargs)
-        echo "entrusted_version=$APPVERSION" >> $GITHUB_ENV
-        
+      run: |        
         olddir=$(pwd)
 
         mkdir -p /tmp/artifacts
