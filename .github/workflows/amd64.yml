@@ -29,7 +29,7 @@ jobs:
         
         cp config.amd64 /tmp/artifacts
 
-        apt update && apt install -y xz-utils build-essential curl bc kmod cpio flex clang libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd
+        apt update && apt install -y xz-utils build-essential curl bc kmod cpio flex gcc libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd
         
         mkdir -p /usr/src/kernel
         
@@ -44,7 +44,7 @@ jobs:
         cd /usr/src/kernel/linux-${{ inputs.kvnum }} && ./scripts/config --disable DEBUG_INFO
         cd /usr/src/kernel/linux-${{ inputs.kvnum }} && ./scripts/config --enable DEBUG_INFO_NONE 
         
-        cd /usr/src/kernel/linux-${{ inputs.kvnum }} && nice make CC="ccache clang" -j`nproc` bindeb-pkg &&  cp ../*.deb /tmp/artifacts/
+        cd /usr/src/kernel/linux-${{ inputs.kvnum }} && nice make CC="ccache gcc -j`nproc` bindeb-pkg &&  cp ../*.deb /tmp/artifacts/
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
       with:
