@@ -4,23 +4,24 @@
 
 ** Overview
 
-This repository provides Debian packages for Linux kernel images (=amd64= and =arm64=).
-
-The goal is to produce /very/ minimal kernel images for Live CDs, with a focus on server systems.
+The goal is to produce minimal Debian kernel images for Live CDs, with a **focus on server systems**.
 - The target kernel version is the latest stable release from https://kernel.org
-- Audio drivers and such are disregarded
+- This is for both =amd64= and =aarch64= architectures  
+- Sound drivers, deprecated or "non-meaningful" settings are discarded from the kernel configuration
 
 ** Main objectives
 
 - The system should be able to successfully boot from =UEFI= or =BIOS= mode on most machines
 - The system should successfully power off without hanging
-- The system should provide modules/features required by container solutions (=podman=, =docker=, etc.)  
+- The system should support containerization
 - The system should support =iptables=
-- The system should support popular common file-systems used in Live CDs (=squashfs=, etc.)
+- The system should support popular file-systems used in Live CDs such as =squashfs=
 
 ** Initial use-case
 
 The first use-case for this repository is supporting the Live CD creation of a document sanitizer tool ([[https://github.com/rimerosolutions/entrusted/][Entrusted]]).
+- It takes a while to compile a kernel for each build
+- Compiling for arm64 under amd64 takes even longer to compile (via =QEMU=)
     
 * What is available?
 
