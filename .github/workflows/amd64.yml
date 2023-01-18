@@ -48,5 +48,5 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: linux-image-tinierdeblive-amd64
+        name: kernel-deblive-smallserver-${{ inputs.kvnum}}-amd64
         path: /tmp/artifacts        
