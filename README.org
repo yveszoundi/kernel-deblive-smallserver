@@ -4,7 +4,7 @@
 
 ** Overview
 
-The goal is to produce minimal Debian kernel images for Live CDs, with a *focus on server systems*.
+The goal is to produce /minimal/ Debian kernel images for Live CDs, with a *focus on server systems*.
 - The target kernel version is the latest stable release from https://kernel.org
 - This is for both =amd64= and =aarch64= architectures  
 - Drivers for audio, video or other "non-meaningful" settings are discarded
@@ -21,16 +21,16 @@ The goal is to produce minimal Debian kernel images for Live CDs, with a *focus 
 
 The first use-case for this repository is supporting the Live CD creation of a document sanitizer tool ([[https://github.com/rimerosolutions/entrusted/][Entrusted]]).
 - It takes a while to compile a kernel from source for every single build
-- Compiling for arm64 under amd64 takes even longer to compile (via =QEMU=)
+- Compiling for =arm64= under =amd64= takes even longer to compile
 
 * How was the configuration defined?
 
-- Start with an Ubuntu kernel configuration in your /boot folder
-- Compare settings with the Alpine Linux virt-flavor kernel configuration
-- Remove as much as possible while testing few Live CD for both arm64 and amd64
+- Start with an Ubuntu kernel configuration in your =/boot= folder
+- Compare settings with the [[https://wiki.alpinelinux.org/wiki/Kernels][Alpine Linux virt-flavor]] kernel configuration
+- Remove as much as possible while testing few Live CD for both =arm64= and =amd64=
 - Stop trying to remove settings when you feel like it's become too risky
-  - You can still keep disabling few settings
-  - However the kernel would only work on your machine and not most machines...
+  - You could still keep disabling few settings
+  - However the kernel would only work for your machine or use-case only...
     
 * What is available?
 
@@ -46,6 +46,7 @@ The zip file for each architecture (=amd64= or =arm64=) contains 3 Debian packag
 | =linux-libc-dev= | Linux support headers for userspace development |
 |------------------+-------------------------------------------------|
 
+The =arm64= kernel packages are created via cross-compilation.
 
 * Where can I read more about this?
 
