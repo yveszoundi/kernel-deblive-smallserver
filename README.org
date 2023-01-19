@@ -41,9 +41,9 @@ The zip file for each architecture (=amd64= or =arm64=) contains 3 Debian packag
 |------------------+-------------------------------------------------|
 | Package          | Description                                     |
 |------------------+-------------------------------------------------|
-| `linux-headers`  | Linux kernel headers                            |
-| `linux-image`    | Linux kernel                                    |
-| `linux-libc-dev` | Linux support headers for userspace development |
+| =linux-headers=  | Linux kernel headers                            |
+| =linux-image=    | Linux kernel                                    |
+| =linux-libc-dev= | Linux support headers for userspace development |
 |------------------+-------------------------------------------------|
 
 
