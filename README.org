@@ -4,33 +4,54 @@
 
 ** Overview
 
-The goal is to produce minimal Debian kernel images for Live CDs, with a **focus on server systems**.
+The goal is to produce minimal Debian kernel images for Live CDs, with a *focus on server systems*.
 - The target kernel version is the latest stable release from https://kernel.org
 - This is for both =amd64= and =aarch64= architectures  
-- Sound drivers, deprecated or "non-meaningful" settings are discarded from the kernel configuration
+- Drivers for audio, video or other "non-meaningful" settings are discarded
 
 ** Main objectives
 
 - The system should be able to successfully boot from =UEFI= or =BIOS= mode on most machines
 - The system should successfully power off without hanging
-- The system should support containerization
+- The system should support containerization (=podman=, =docker=, etc.)
 - The system should support =iptables=
 - The system should support popular file-systems used in Live CDs such as =squashfs=
 
 ** Initial use-case
 
 The first use-case for this repository is supporting the Live CD creation of a document sanitizer tool ([[https://github.com/rimerosolutions/entrusted/][Entrusted]]).
-- It takes a while to compile a kernel for each build
+- It takes a while to compile a kernel from source for every single build
 - Compiling for arm64 under amd64 takes even longer to compile (via =QEMU=)
+
+* How was the configuration defined?
+
+- Start with an Ubuntu kernel configuration in your /boot folder
+- Compare settings with the Alpine Linux virt-flavor kernel configuration
+- Remove as much as possible while testing few Live CD for both arm64 and amd64
+- Stop trying to remove settings when you feel like it's become too risky
+  - You can still keep disabling few settings
+  - However the kernel would only work on your machine and not most machines...
     
 * What is available?
 
-Please visit the [[https://github.com/yveszoundi/linux-image-tinierdeblive/releases][releases page]] for downloads (64-bit: [[https://en.wikipedia.org/wiki/X86-64][amd64/x86_64]] and [[https://en.wikipedia.org/wiki/AArch64][aarch64/arm64]]).
+Please visit the [[https://github.com/yveszoundi/kernel-deblive-smallserver/releases][releases page]] for downloads (64-bit: [[https://en.wikipedia.org/wiki/X86-64][amd64/x86_64]] and [[https://en.wikipedia.org/wiki/AArch64][arm64/aarch64]]).
 
-* Few references
+The zip file for each architecture (=amd64= or =arm64=) contains 3 Debian packages:
+
+|------------------+-------------------------------------------------|
+| Package          | Description                                     |
+|------------------+-------------------------------------------------|
+| `linux-headers`  | Linux kernel headers                            |
+| `linux-image`    | Linux kernel                                    |
+| `linux-libc-dev` | Linux support headers for userspace development |
+|------------------+-------------------------------------------------|
+
+
+* Where can I read more about this?
 
 - [[https://kernel.org/][The Linux Kernel Archives]]
 - Building a Debian kernel package
   - [[https://wiki.debian.org/BuildADebianKernelPackage][Debian wiki page guide]]
   - [[https://www.dwarmstrong.org/kernel/][Blog post from Daniel Wayne Armstrong]]  
 - [[https://git.alpinelinux.org/aports/tree/main/linux-lts?h=master][Alpine Linux default kernel configuration files]]
+- [[https://romanrm.net/a10/cross-compile-kernel][Kernel cross-compiling notes]]
