@@ -29,7 +29,7 @@ jobs:
         
         cp config.amd64 /tmp/artifacts/config
 
-        apt update && apt install -y xz-utils build-essential curl bc kmod cpio flex gcc libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd clang
+        apt update && apt install -y xz-utils build-essential curl bc kmod cpio flex gcc libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd 
         
         mkdir -p /usr/src/kernel
         
@@ -60,7 +60,7 @@ jobs:
     - name: Build
       shell: bash
       run: |        
-        mkdir -p /tmp/artifacts && cp ${{ github.workspace }}/config.arm64 /tmp/artifacts/config && docker run --platform linux/amd64 --privileged --cap-add SYS_ADMIN --device /dev/fuse -v /tmp/artifacts:/artifacts docker.io/uycyjnzgntrn/rust-linux:1.64.0 /bin/sh -c "apt update && apt install -y xz-utils git binutils-aarch64-linux-gnu fakeroot  zlib1g-dev gcc-aarch64-linux-gnu build-essential curl bc kmod cpio flex clang libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd && mkdir -p /usr/src/kernel && cd /usr/src/kernel && curl -o linux-${{ inputs.kvnum }}.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${{ inputs.kvnum }}.tar.xz && tar axf linux-${{ inputs.kvnum }}.tar.xz && rm /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz && cd /usr/src/kernel/linux-${{ inputs.kvnum }} && cp /artifacts/config .config && ./scripts/config --disable SYSTEM_TRUSTED_KEYS && ./scripts/config --disable SYSTEM_REVOCATION_KEYS && ./scripts/config --disable DEBUG_INFO && ./scripts/config --enable DEBUG_INFO_NONE && nice make ARCH=arm64 DEB_HOST_ARCH=arm64 CONCURRENCY_LEVEL=`nproc` CC=aarch64-linux-gnu-gcc CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION=-smallserver bindeb-pkg &&  cp ../*.deb /artifacts/ && rm /artifacts/config"
+        mkdir -p /tmp/artifacts && cp ${{ github.workspace }}/config.arm64 /tmp/artifacts/config && docker run --platform linux/amd64 --privileged --cap-add SYS_ADMIN --device /dev/fuse -v /tmp/artifacts:/artifacts docker.io/uycyjnzgntrn/rust-linux:1.64.0 /bin/sh -c "apt update && apt install -y xz-utils git binutils-aarch64-linux-gnu fakeroot  zlib1g-dev gcc-aarch64-linux-gnu build-essential curl bc kmod cpio flex libncurses5-dev libelf-dev libssl-dev dwarves bison ccache rsync wget zstd && mkdir -p /usr/src/kernel && cd /usr/src/kernel && curl -o linux-${{ inputs.kvnum }}.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${{ inputs.kvnum }}.tar.xz && tar axf linux-${{ inputs.kvnum }}.tar.xz && rm /usr/src/kernel/linux-${{ inputs.kvnum }}.tar.xz && cd /usr/src/kernel/linux-${{ inputs.kvnum }} && cp /artifacts/config .config && ./scripts/config --disable SYSTEM_TRUSTED_KEYS && ./scripts/config --disable SYSTEM_REVOCATION_KEYS && ./scripts/config --disable DEBUG_INFO && ./scripts/config --enable DEBUG_INFO_NONE && nice make ARCH=arm64 DEB_HOST_ARCH=arm64 CONCURRENCY_LEVEL=`nproc` CC=aarch64-linux-gnu-gcc CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION=-smallserver bindeb-pkg &&  cp ../*.deb /artifacts/ && rm /artifacts/config"
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
       with:
