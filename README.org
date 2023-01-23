@@ -1,6 +1,6 @@
 #+TITLE: README
 
-/This is still WORK IN PROGRESS and is only being tested under QEMU/.
+/This is still WORK IN PROGRESS and it's only being tested under QEMU/.
 
 * What is this?
 
