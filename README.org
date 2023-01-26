@@ -1,5 +1,9 @@
 #+TITLE: README
 
+
+[[https://github.com/yveszoundi/kernel-deblive-smallserver/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/kernel-deblive-smallserver/actions/workflows/build.yml][file:https://github.com/yveszoundi/kernel-deblive-smallserver/actions/workflows/build.yml/badge.svg]]
+
+
 /This is still WORK IN PROGRESS and it's only being tested under QEMU/.
 
 * What is this?
