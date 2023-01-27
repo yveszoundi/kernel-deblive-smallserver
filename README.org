@@ -11,13 +11,15 @@
 ** Overview
 
 The goal is to produce /minimal/ Debian kernel images for Live CDs, with a *focus on server systems*.
-- The target kernel version is the latest stable release from https://kernel.org
+- The target kernel versions are [[https://kernel.org/category/releases.html][longterm release kernels]]
+  - Only versions that compile without a proliferation of configuration files are considered
+  - There will be occasionally other releases for bleeding edge versions
 - This is for both =amd64= and =aarch64= architectures  
 - Drivers for audio, video or other "non-meaningful" settings are discarded
 
 ** Main objectives
 
-- The system should be able to successfully boot from =UEFI= or =BIOS= mode on most machines
+- The system should be able to successfully boot from [[https://en.wikipedia.org/wiki/UEFI][UEFI]] or [[https://en.wikipedia.org/wiki/BIOS][BIOS]] mode on most machines
 - The system should successfully power off without hanging
 - The system should support "containerization" (=podman=, =docker=, etc.)
 - The system should support =iptables=
@@ -26,8 +28,6 @@ The goal is to produce /minimal/ Debian kernel images for Live CDs, with a *focu
 ** Initial use-case
 
 The first use-case for this repository is supporting the Live CD creation of a document sanitizer tool ([[https://github.com/rimerosolutions/entrusted/][Entrusted]]).
-- It takes a while to compile a kernel from source for every single build
-- Compiling for =arm64= under =amd64= takes even longer to compile
 
 * How was the configuration defined?
 
