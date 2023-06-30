@@ -6,7 +6,7 @@ on:
       kvnum:
         description: 'Kernel version number'
         required: true
-        default: '6.2.2'
+        default: '6.1.38'
         type: 'string'
 
 jobs:

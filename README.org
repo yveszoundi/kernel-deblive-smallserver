@@ -18,12 +18,12 @@ The goal is to produce /minimal/ Debian kernel images for Live CDs, with a *focu
 - Drivers for audio, video or other "non-meaningful" settings are discarded
 - The resulting kernel image installation size should be as small as possible
 
-** Main objectives
+** Main project requirements
 
 - The system should be able to successfully boot from [[https://en.wikipedia.org/wiki/UEFI][UEFI]] or [[https://en.wikipedia.org/wiki/BIOS][BIOS]] mode on most machines
 - The system should successfully power off without hanging
 - The system should support "containerization" (=podman=, =docker=, etc.)
-- The system should support =iptables=
+- The system should support =iptables= for firewall settings
 - The system should support popular file-systems used in Live CDs such as =squashfs=
 - The system Live media size should be reduced significantly with provided kernel packages
 
@@ -36,9 +36,7 @@ The first use-case for this repository is supporting the Live CD creation of a d
 - Start with an Ubuntu kernel configuration in your =/boot= folder
 - Compare settings with the [[https://wiki.alpinelinux.org/wiki/Kernels][Alpine Linux virt-flavor]] kernel configuration
 - Remove as much as possible while testing few Live CD for both =arm64= and =amd64=
-- Stop trying to remove settings when you feel like it's become too risky
-  - You could still keep disabling few settings
-  - However the kernel would only work for your machine or use-case only...
+- Stop trying to remove settings when it's become too cumbersome to test
     
 * What is available?
 
