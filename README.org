@@ -10,7 +10,7 @@
 
 ** Overview
 
-The goal is to produce /minimal/ Debian kernel images for Live CDs, with a *focus on server systems*.
+This is a set of /minimal/ Debian kernel images for Live CDs, with a *focus on server systems*.
 - The target kernel versions are [[https://kernel.org/category/releases.html][longterm release kernels]]
   - Only versions that compile without a proliferation of configuration files are considered
   - There will be occasionally other releases for bleeding edge versions
@@ -18,7 +18,7 @@ The goal is to produce /minimal/ Debian kernel images for Live CDs, with a *focu
 - Drivers for audio, video or other "non-meaningful" settings are discarded
 - The resulting kernel image installation size should be as small as possible
 
-** Main project requirements
+** Main goals
 
 - The system should be able to successfully boot from [[https://en.wikipedia.org/wiki/UEFI][UEFI]] or [[https://en.wikipedia.org/wiki/BIOS][BIOS]] mode on most machines
 - The system should successfully power off without hanging
