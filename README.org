@@ -1,8 +1,6 @@
 #+TITLE: README
 
-
 [[https://github.com/yveszoundi/kernel-deblive-smallserver/blob/main/LICENSE][file:http://img.shields.io/badge/license-GNU%20GPLv3-blue.svg]] [[https://github.com/yveszoundi/kernel-deblive-smallserver/actions/workflows/build.yml][file:https://github.com/yveszoundi/kernel-deblive-smallserver/actions/workflows/build.yml/badge.svg]]
-
 
 /tl;dr Smaller kernel image for server-centric Debian-based Live CDs. This is NOT for Desktop systems./
 
@@ -35,14 +33,14 @@ The first use-case for this repository is supporting the Live CD creation of a d
 
 - Start with an Ubuntu kernel configuration in your =/boot= folder
 - Compare settings with the [[https://wiki.alpinelinux.org/wiki/Kernels][Alpine Linux virt-flavor]] kernel configuration
-- Remove as much as possible while testing few Live CD for both =arm64= and =amd64=
-- Stop trying to remove settings when it's become too cumbersome to test
+- Remove as many settings as possible, while testing few Live CDs for =arm64= and =amd64=
+- Stop removing settings when it becomes too cumbersome to test
     
 * What is available?
 
 Please visit the [[https://github.com/yveszoundi/kernel-deblive-smallserver/releases][releases page]] for downloads (64-bit: [[https://en.wikipedia.org/wiki/X86-64][amd64/x86_64]] and [[https://en.wikipedia.org/wiki/AArch64][arm64/aarch64]]).
 
-The zip file for each architecture (=amd64= or =arm64=) contains 3 Debian packages:
+The zip archive for each architecture (=amd64= or =arm64=) contains 3 Debian packages:
 
 |------------------+-------------------------------------------------|
 | Package          | Description                                     |
